@@ -1,0 +1,29 @@
+extend type Query {
+    findZonesByDistrict(district: Int!): [Zone!]!
+    findValuesByZone(zoneNumber: Int!): [ZonalValue!]!
+    findValuesByClass(classCode: String!): [ZonalValue!]!
+    findAllZonalClass: [ZonalClassification!]!
+}
+
+type Zone {
+    id: ID!
+    number: Int!
+    barangay: String!
+    boundaries: String
+    district: RevenueDistrict!
+}
+
+type ZonalValue {
+    id: ID!
+    barangay: String!
+    streetSubdivision: String
+    vicinity: String
+    pricePerSqm: Float!
+    zoneNumber: Int!
+    classification: ZonalClassification!
+}
+
+type ZonalClassification {
+    code: String!
+    name: String!
+}

@@ -1,0 +1,19 @@
+extend type Query {
+    findBanksByDistrict(district: Int!): [AccreditedBank!]!
+    findBanksByAddress(address: String!):[AccreditedBank!]!
+}
+
+type AccreditedBank {
+    id: ID!
+    district: RevenueDistrict
+    code: String!
+    branch: String!
+    details: BankDetails!
+    fullAddress: String!
+}
+
+type BankDetails {
+    shortName: String!
+    fullName: String!
+    logo: String!
+}

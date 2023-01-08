@@ -1,0 +1,29 @@
+extend type Query {
+    findCharterById(uuid: String!): Charter
+    findAllCharter(page: Int!, rowsPerPage: Int!): [Charter!]!
+    searchCharter(search: String!): [Charter!]!
+}
+
+extend type Mutation {
+    createCharter(charter: CharterInput!): Charter
+    updateCharter(uuid: String!, charter: CharterInput!): Charter
+}
+
+type Charter {
+    uuid: ID
+    chapter: Int!
+    title: String!
+    description: String!
+    applicants: String!
+    fee: Float!
+    duration: String!
+}
+
+input CharterInput {
+    chapter: Int!
+    title: String!
+    description: String!
+    applicants: String!
+    fee: Float!
+    duration: String!
+}
