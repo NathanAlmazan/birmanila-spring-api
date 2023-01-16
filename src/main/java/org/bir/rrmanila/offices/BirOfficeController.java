@@ -10,6 +10,7 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Controller
 public class BirOfficeController {
@@ -33,6 +34,11 @@ public class BirOfficeController {
     @SchemaMapping(typeName = "RevenueDistrict", field = "offices")
     public Flux<BirOffice> officesByDistrict(RevenueDistrict district) {
         return birOfficeServices.findOfficesByDistrict(district.getNumber());
+    }
+
+    @SchemaMapping(typeName = "BirOffice", field = "district")
+    public Mono<RevenueDistrict> officesDistrict(BirOffice birOffice) {
+        return birOfficeServices.findDistrictByNum(birOffice.getDistrict());
     }
 
     @SchemaMapping(typeName = "BirOffice", field = "officers")

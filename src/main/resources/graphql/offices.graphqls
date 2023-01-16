@@ -1,7 +1,7 @@
 extend type Query {
     findAllDistricts: [RevenueDistrict!]!
     findAllOffices: [BirOffice!]!
-    findOfficesByDistrict(district: Int!): [BirOffice!]!
+    findOfficesByDistrict(district: Int): [BirOffice!]!
 }
 
 type RevenueDistrict {
@@ -15,6 +15,7 @@ type BirOffice {
     name: String!
     address: String!
     email: String!
+    district: RevenueDistrict
     officers: [ContactPerson!]!
 }
 

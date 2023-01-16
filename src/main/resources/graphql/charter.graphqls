@@ -1,12 +1,29 @@
 extend type Query {
     findCharterById(uuid: String!): Charter
     findAllCharter(page: Int!, rowsPerPage: Int!): [Charter!]!
+    findCategoryById(categoryId: Int!): CharterCategory
+    findAllCategories: [CharterCategory!]!
     searchCharter(search: String!): [Charter!]!
 }
 
 extend type Mutation {
     createCharter(charter: CharterInput!): Charter
-    updateCharter(uuid: String!, charter: CharterInput!): Charter
+    createCharterCategory(name: String!): CharterCategory
+}
+
+enum ProcessType {
+    CLIENT, OFFICER
+}
+
+enum Redirects {
+    BANK,
+    OFFICES,
+    ZONAL
+}
+
+type CharterCategory {
+    id: ID!
+    name: String!
 }
 
 type Charter {
@@ -14,16 +31,74 @@ type Charter {
     chapter: Int!
     title: String!
     description: String!
+    location: String!
     applicants: String!
-    fee: Float!
+    period: String
+    fee: String
     duration: String!
+    requirementClasses: [RequirementClass!]!
+    processList: [CharterProcess!]!
+}
+
+type RequirementClass {
+    id: ID!
+    name: String!
+    required: Boolean
+    requirements: [CharterRequirements]
+}
+
+type CharterRequirements {
+    id: ID!
+    name: String!
+    notes: String
+    required: Boolean
+    redirect: Redirects
+}
+
+type CharterProcess {
+    id: ID!
+    step: Int!
+    description: String!
+    type: String!
+    duration: String
+    fee: String
+    notes: String
+    redirect: String
 }
 
 input CharterInput {
     chapter: Int!
     title: String!
     description: String!
+    location: String!
     applicants: String!
-    fee: Float!
+    period: String
+    fee: String
     duration: String!
+    categoryId: Int!
+    requirementClasses: [RequirementClassInput!]!
+    processList: [CharterProcessInput!]!
+}
+
+input RequirementClassInput {
+    name: String!
+    required: Boolean
+    requirements: [RequirementsInput!]!
+}
+
+input RequirementsInput {
+    name: String!
+    notes: String
+    required: Boolean
+    redirect: Redirects
+}
+
+input CharterProcessInput {
+    step: Int!
+    description: String!
+    type: ProcessType!
+    duration: String
+    fee: String
+    notes: String
+    redirect: Redirects
 }

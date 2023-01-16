@@ -43,6 +43,7 @@ public class AccreditedBank {
     private String city;
 
     public String getFullAddress() {
+        if (address == null) return  street + " " + district;
         return address + " " + street + " " + district;
     }
 }

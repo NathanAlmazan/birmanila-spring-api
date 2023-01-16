@@ -26,6 +26,7 @@ public class BirOfficeServices {
     }
 
     public Mono<RevenueDistrict> findDistrictByNum(Integer num) {
+        if (num == null) return null;
         return districtRepository.findById(num);
     }
 
