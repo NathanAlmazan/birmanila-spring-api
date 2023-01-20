@@ -67,4 +67,9 @@ public class Charter {
     @NotNull
     @Valid
     private List<RequirementClass> requirementClasses;
+
+    public String getSearchQuery() {
+        if (description.length() > 4) return title + " " + description;
+        return title + " " + applicants;
+    }
 }

@@ -31,6 +31,11 @@ public class BirOfficeController {
         return birOfficeServices.findOfficesByDistrict(district);
     }
 
+    @QueryMapping
+    public Flux<BirOffice> searchBirOffices(@Argument String office) {
+        return birOfficeServices.findBanksByNameAndAddress(office);
+    }
+
     @SchemaMapping(typeName = "RevenueDistrict", field = "offices")
     public Flux<BirOffice> officesByDistrict(RevenueDistrict district) {
         return birOfficeServices.findOfficesByDistrict(district.getNumber());

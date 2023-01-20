@@ -1,6 +1,7 @@
 extend type Query {
     findCharterById(uuid: String!): Charter
-    findAllCharter(page: Int!, rowsPerPage: Int!): [Charter!]!
+    findAllCharter: [Charter!]!
+    findChartersByCategory(category: Int!): [Charter!]!
     findCategoryById(categoryId: Int!): CharterCategory
     findAllCategories: [CharterCategory!]!
     searchCharter(search: String!): [Charter!]!
@@ -18,7 +19,8 @@ enum ProcessType {
 enum Redirects {
     BANK,
     OFFICES,
-    ZONAL
+    ZONAL,
+    EREG
 }
 
 type CharterCategory {
@@ -63,7 +65,7 @@ type CharterProcess {
     duration: String
     fee: String
     notes: String
-    redirect: String
+    redirect: Redirects
 }
 
 input CharterInput {

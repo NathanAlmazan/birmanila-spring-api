@@ -1,6 +1,7 @@
 extend type Query {
     findAllDistricts: [RevenueDistrict!]!
     findAllOffices: [BirOffice!]!
+    searchBirOffices(office: String!): [BirOffice!]!
     findOfficesByDistrict(district: Int): [BirOffice!]!
 }
 

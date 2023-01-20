@@ -7,8 +7,8 @@ public interface CosineDistance {
 
     default double computeCosineDistance(String query, String result) {
         // remove special characters, convert to lower case, and split by words
-        String[] wordsA = query.replaceAll("[^A-Za-z0-9]","").toLowerCase().split(" ");
-        String[] wordsB = result.replaceAll("[^A-Za-z0-9]","").toLowerCase().split(" ");
+        String[] wordsA = query.replaceAll("[^A-Za-z0-9]"," ").toLowerCase().split(" ");
+        String[] wordsB = result.replaceAll("[^A-Za-z0-9]"," ").toLowerCase().split(" ");
 
         // create hash map to store the words' count
         HashMap<String, Integer> setA = new HashMap<>();

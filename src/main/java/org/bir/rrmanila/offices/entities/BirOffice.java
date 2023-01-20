@@ -1,5 +1,6 @@
 package org.bir.rrmanila.offices.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "offices")
 public class BirOffice {
     @Id
@@ -27,4 +29,8 @@ public class BirOffice {
 
     @Column("rdo_no")
     private Integer district;
+
+    public String getSearchQuery() {
+        return name + " " + address;
+    }
 }

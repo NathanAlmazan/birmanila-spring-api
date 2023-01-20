@@ -79,11 +79,12 @@ public class CharterService implements CosineDistance {
         return charterRepository.findById(uuid);
     }
 
-    public Flux<Charter> findAllCharter(Integer page, Integer rowsPerPage) {
-        Integer limit = page *  rowsPerPage;
-        Integer offset = (page - 1) * rowsPerPage;
+    public Flux<Charter> findAllCharter() {
+        return charterRepository.findAll();
+    }
 
-        return charterRepository.findAllCharter(limit, offset);
+    public Flux<Charter> findChartersByCategory(Integer categoryId) {
+        return charterRepository.findByCategoryId(categoryId);
     }
 
     public Flux<Charter> searchCharter(String query) {
@@ -93,7 +94,7 @@ public class CharterService implements CosineDistance {
         // convert each word to ILIKE query
         List<String> queries = new ArrayList<>();
         for (String word : words) {
-            queries.add("charter_title ILIKE '%" + word + "%' OR charter_desc ILIKE '%" + word + "%'");
+            queries.add("charter_title ILIKE '%" + word + "%' OR charter_desc ILIKE '%" + word + "%' OR charter_applicants ILIKE '%" + word + "%'");
         }
         String dbQuery = StringUtils.join(queries, " OR ");
 
@@ -103,8 +104,8 @@ public class CharterService implements CosineDistance {
                 .all();
 
         return results.sort((o1, o2) -> Double.compare(
-                computeCosineDistance(query, o2.getTitle()) + computeCosineDistance(query, o2.getDescription()),
-                computeCosineDistance(query, o1.getTitle()) + computeCosineDistance(query, o1.getDescription())
+                computeCosineDistance(query, o2.getSearchQuery()),
+                computeCosineDistance(query, o1.getSearchQuery())
         ));
     }
 }

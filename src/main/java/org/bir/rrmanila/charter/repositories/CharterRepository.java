@@ -10,9 +10,5 @@ import java.util.UUID;
 
 @Repository
 public interface CharterRepository extends ReactiveCrudRepository<Charter, UUID> {
-
-    @Query("SELECT * FROM citizen_charter " +
-            "ORDER BY citizen_charter.charter_chapter ASC " +
-            "LIMIT ?1 OFFSET ?2")
-    Flux<Charter> findAllCharter(Integer limit, Integer offset);
+    Flux<Charter> findByCategoryId(Integer categoryId);
 }

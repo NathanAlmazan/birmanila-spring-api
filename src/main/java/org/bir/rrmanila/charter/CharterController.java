@@ -39,8 +39,13 @@ public class CharterController {
     }
 
     @QueryMapping
-    public Flux<Charter> findAllCharter(@Argument Integer page, @Argument Integer rowsPerPage) {
-        return charterService.findAllCharter(page, rowsPerPage);
+    public Flux<Charter> findAllCharter() {
+        return charterService.findAllCharter();
+    }
+
+    @QueryMapping
+    public Flux<Charter> findChartersByCategory(@Argument Integer category) {
+        return charterService.findChartersByCategory(category);
     }
 
     @QueryMapping
